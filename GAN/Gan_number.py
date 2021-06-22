@@ -128,6 +128,7 @@ def train_gan():
     plt.figure(figsize=(16, 8))
     plt.imshow(np.array(image_list).T, interpolation="none", cmap="Blues")
     plt.show()
+    print(G.forward(torch.FloatTensor([0.2])))
     print(D.forward(generate_real()).item())
     print(D.forward(generate_noise(4)).item())
 
@@ -151,10 +152,11 @@ if __name__ == '__main__':
     # print(gen.forward(torch.FloatTensor([0.5])))
 
     # train_gan
-    train_gan()
-    # G = Generator()
-    # G.load_state_dict(torch.load("generator.pkl"), False)
-    # print(G.forward(torch.FloatTensor([0.5])))
+    # train_gan()
+    G = Generator()
+    G.load_state_dict(torch.load("generator.pkl"), False)
+    with torch.no_grad():
+        print(G.forward(torch.FloatTensor([0.5])))
     #
     # dis = Discriminator()
     # dis.load_state_dict(torch.load("discriminator.pkl"), False)
