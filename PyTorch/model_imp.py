@@ -6,6 +6,7 @@ import pandas as pd
 # pytorch 提供的导入数据方法
 from torch.utils.data import Dataset
 
+
 class Classifier(nn.Module):
     def __init__(self):
         super(Classifier, self).__init__()
@@ -77,9 +78,9 @@ class MinstDataset(Dataset):
 
 if __name__ == '__main__':
     # train_set
-    minst = MinstDataset("mnist_csv\mnist_train.csv")
+    minst = MinstDataset("mnist_csv/mnist_test.csv")
     # test_set
-    minst_test = MinstDataset("mnist_csv\mnist_test.csv")
+    minst_test = MinstDataset("/mnist_csv/mnist_test.csv")
     print(minst_test[33])
     minst_test.plot_imgae(33)
 
