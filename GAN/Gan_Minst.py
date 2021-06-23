@@ -35,7 +35,7 @@ class Discriminator(nn.Module):
         return self.model(inputs)
 
     def train(self, inputs, targets):
-        outputs = self.model(inputs)
+        outputs = self.forward(inputs)
         loss = self.loss_function(outputs, targets)
         self.counter += 1
         if self.counter % 10 == 0:
@@ -201,10 +201,10 @@ if __name__ == '__main__':
     # plt.imshow(imge, interpolation="none", cmap="Blues")
     # plt.show()
 
-    # train_minst(minst_train)
-    gen = torch.load("gen.pth")
+    train_minst(minst_train)
+    # gen = torch.load("gen.pth")
     # imge = gen.forward(torch.randn(100)).detach().numpy().reshape(28, 28)
     # plt.imshow(imge, interpolation="none", cmap="Blues")
     # plt.show()
-    plot_random_seed(gen)
+    # plot_random_seed(gen)
 
