@@ -139,7 +139,7 @@ class Gan(object):
         f, axarr = plt.subplots(2, 3, figsize=(16, 8))
         for i in range(2):
             for j in range(3):
-                output = self.gen.forward(torch.randn(100).cuda())
+                output = self.gen.forward(torch.randn(100).cuda(device=self.device))
                 img = output.cpu().detach().numpy().reshape(28, 28)
                 axarr[i, j].imshow(img, interpolation="none", cmap="Blues")
         plt.show()
