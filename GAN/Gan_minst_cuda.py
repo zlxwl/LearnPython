@@ -55,7 +55,7 @@ class Discriminator(nn.Module):
 
         self.counter += 1
         if self.counter % 10 == 0:
-            self.progress.append(loss)
+            self.progress.append(loss.cpu().item())
 
         if self.counter % 10000 == 0:
             print("counter =", self.counter)
@@ -99,7 +99,7 @@ class Generator(nn.Module):
         self.counter += 1
         self.counter += 1
         if self.counter % 10 == 0:
-            self.progress.append(loss)
+            self.progress.append(loss.cpu().item())
 
         if self.counter % 10000 == 0:
             print("counter =", self.counter)
@@ -124,7 +124,7 @@ class Gan(object):
         for label, target, image in self.train_data:
             self.dis.train(image.cuda(device=self.device),
                            torch.FloatTensor([1.0]).cuda(device=self.device))
-            self.dis.train(self.gen.forward(torch.randn(100, device=self.device)).detach(),
+            self.dis.train(self.gen.forward(torch.rand(100, device=self.device)).detach(),
                            torch.FloatTensor([0.0]).cuda(device=self.device))
             self.gen.train(self.dis, torch.randn(100).cuda(device=self.device),
                            torch.FloatTensor([1.0]).cuda(device=self.device))
@@ -139,7 +139,7 @@ class Gan(object):
         f, axarr = plt.subplots(2, 3, figsize=(16, 8))
         for i in range(2):
             for j in range(3):
-                output = self.gen.forward(torch.randn(100).cuda(device=self.device))
+                output = self.gen.forward(torch.rand(100).cuda(device=self.device))
                 img = output.cpu().detach().numpy().reshape(28, 28)
                 axarr[i, j].imshow(img, interpolation="none", cmap="Blues")
         plt.show()
